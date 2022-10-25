@@ -20,7 +20,8 @@ endif
 $(INSTALL_DIR):
 	@mkdir -p $@
 
-$(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ $(RANDOM_EXAMPLES_ROOT)/Cargo.toml
+$(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ $(RANDOM_EXAMPLES_ROOT)/Cargo.toml \
+$(RANDOM_EXAMPLES_ROOT)/try-csl/src/* $(RANDOM_EXAMPLES_ROOT)/try-csl/.cargo/ $(RANDOM_EXAMPLES_ROOT)/try-csl/Cargo.toml
 	@echo "Building random_examples (${RELEASE_TYPE})"
 	@cargo build ${CARGO_BUILD_FLAGS} \
 	&& echo "Building done" \

@@ -1,3 +1,5 @@
+//extern crate try_csl;
+
 use std::ops::Deref;
 use std::slice;
 use std::str;
@@ -34,7 +36,7 @@ pub extern "C" fn print_to_conterm(len: i32) {
         string_from_host = args.string_from_host;
     }
 
-    let out_str = format!("Printing to Conterm FROM wasm:: {}", string_from_host);
+    let out_str = format!("Printing to Conterm FROM wasm:: {} {}", string_from_host, try_csl::add(2,5));
 
     unsafe {
 
