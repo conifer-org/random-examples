@@ -36,7 +36,7 @@ pub extern "C" fn print_to_conterm(len: i32) {
         string_from_host = args.string_from_host;
     }
 
-    let out_str = format!("Printing to Conterm FROM wasm:: {} {}", string_from_host, try_csl::add(2,5));
+    let out_str = format!("Printing to Conterm FROM wasm:: {} {}", string_from_host, csl::csl_add(2,5));
 
     unsafe {
 
@@ -73,6 +73,19 @@ pub extern "C" fn test_spawn(len: i32) {
     for _ in 0..thread_nos {
         unsafe {
             spawn_dup();
+        }
+    }
+}
+
+mod csl {
+    #[link(name = "try_csl")]
+    extern {
+        fn add(left: usize, right: usize) -> usize;
+    }
+
+    pub fn csl_add(left: usize, right: usize) -> usize {
+        unsafe {
+            add(left, right)
         }
     }
 }

@@ -1,5 +1,2 @@
-#[build]
-#target = "wasm32-unknown-unknown"
-#target-dir = "../output/"
-
-
+[build]
+target = "wasm32-unknown-unknown"

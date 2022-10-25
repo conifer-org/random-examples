@@ -21,7 +21,13 @@ $(INSTALL_DIR):
 	@mkdir -p $@
 
 $(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ $(RANDOM_EXAMPLES_ROOT)/Cargo.toml \
-$(RANDOM_EXAMPLES_ROOT)/try-csl/src/* $(RANDOM_EXAMPLES_ROOT)/try-csl/.cargo/ $(RANDOM_EXAMPLES_ROOT)/try-csl/Cargo.toml
+$(RANDOM_EXAMPLES_ROOT)/try-csl/src/* $(RANDOM_EXAMPLES_ROOT)/try-csl/.cargo/ $(RANDOM_EXAMPLES_ROOT)/try-csl/Cargo.toml \
+$(RANDOM_EXAMPLES_ROOT)/build.rs
+	@echo "Building try-csl (${RELEASE_TYPE})"
+	@cd try-csl \
+	&& cargo build ${CARGO_BUILD_FLAGS} \
+	&& echo "Building done" \
+    || echo "Error building try-csl"
 	@echo "Building random_examples (${RELEASE_TYPE})"
 	@cargo build ${CARGO_BUILD_FLAGS} \
 	&& echo "Building done" \
