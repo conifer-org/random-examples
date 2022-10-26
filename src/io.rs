@@ -1,4 +1,4 @@
-//extern crate try_csl;
+//! This is `atom1`
 
 use std::ops::Deref;
 use std::slice;
@@ -7,6 +7,7 @@ use serde::{Serialize, Deserialize};
 
 use postcard::{from_bytes, to_allocvec};
 
+//"test" is the name of the wasm module; equivalent to the atom name; in this case it refers to spinner imports
 #[link(wasm_import_module = "test")]
 extern "C" {
     fn get_args(ptr: *const u8, len: usize);
@@ -77,9 +78,10 @@ pub extern "C" fn test_spawn(len: i32) {
     }
 }
 
-mod csl {
-    #[link(name = "try_csl")]
-    extern {
+pub mod csl {
+
+    #[link(wasm_import_module = "atom2")]
+    extern "C" {
         fn add(left: usize, right: usize) -> usize;
     }
 
