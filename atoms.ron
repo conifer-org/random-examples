@@ -1,0 +1,17 @@
+PartialAtoms(
+    atoms: {
+        "patom1": PartialAtom(
+            part: 1,
+            total_parts: 1,
+            name: "io_atom",
+            cmd: "make build RELEASE_TYPE=release",
+            //cmd: "cargo build --release --no-default-features --features main_atom --lib",
+            cmd_path: "", //indicates current path (./) relative to where this file is
+            artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
+            entry_points: [
+                "test_spawn",
+                "print_to_conterm",
+            ]
+        ),
+    }
+)

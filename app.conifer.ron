@@ -1,0 +1,39 @@
+App(
+    name: "random-examples",
+    csl: true, //this doesn't do anythign right now, as CSL integration is manual
+    csf: true, //this doesn't do anythign right now, as CSL integration is manual
+    molecules: [
+        Molecule(
+            name: "main",
+            atoms: [
+                "csl_atom",
+                "io_atom"
+            ]
+        ),
+        /*Molecule(
+            name: "count",
+            atoms: [
+                "csl",
+                "county_bounty"
+            ]
+        ),*/
+    ],
+    atoms: {
+        /*"init_atom": Atom(
+            definitions: [
+                "",
+            ]
+        ),*/
+        "csl_atom": Atom(
+            definitions: [
+                "../../conifer-sdk/conifer-standard-library/csl_atoms.ron:patom",
+            ]
+        ),
+        "io_atom": Atom(
+            definitions: [
+                "atoms.ron:patom1",
+            ]
+        ),
+    },
+    main_electron: "print_to_conterm",
+)
