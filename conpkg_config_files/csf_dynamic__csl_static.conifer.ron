@@ -1,0 +1,53 @@
+App(
+    name: "random-examples-csf-D-csl-S",
+    partial_atoms_sources: {
+        "patom1": PartialAtomsSource(
+            path:"../patoms.ron"
+        ),
+        "csf_patoms": (
+            path:"../../../conifer-sdk/conifer-standard-framework/csf_atoms.ron"
+        )
+    },
+    molecules: [
+        Molecule(
+            name: "main",
+            atoms: [
+                // the dynamically linked CSF
+                "csf_atom",
+                "io_atom"
+            ]
+        ),
+        //Technically, the below Molecule is "auto-described" and need not be written (in the future)
+        Molecule(
+            name: "init",
+            atoms: [
+                "init_atom"
+            ]
+        ),
+    ],
+    atoms: {
+        //Technically, the below Atom is "auto-described" and need not be written (in the future)
+        "init_atom": Atom(
+            partial_atoms: {
+                "init_patom": "csf_patoms",
+            },
+            env_vars: {
+                // applies to this atom
+                "CSF_CONFIG": File("../some_csf.ron"), //this could be any other file
+                "RANDOM": String("normal_value"),
+            }
+        ),
+        "io_atom": Atom(
+            partial_atoms: {
+                "io_csf_dynamic_csl_static_patom": "patom1",
+            }
+        ),
+        "csf_atom": Atom(
+            partial_atoms: {
+                // the dynamically linked CSF
+                "csf_patom": "csf_patoms",
+            }
+        ),
+    },
+    main_electron: "init",
+)

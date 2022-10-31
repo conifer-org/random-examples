@@ -1,0 +1,35 @@
+App(
+    name: "random-examples-csl-D-1",
+    partial_atoms_sources: {
+        "patom1": PartialAtomsSource(
+            path:"../patoms.ron"
+        ),
+        "csl_patoms": (
+            path:"../../../conifer-sdk/conifer-standard-library/csl_atoms.ron"
+        ),
+    },
+    molecules: [
+        Molecule(
+            name: "main",
+            atoms: [
+                // the dynamically linked CSL
+                "csl_atom",
+                "io_atom"
+            ]
+        ),
+    ],
+    atoms: {
+        "csl_atom": Atom(
+            partial_atoms: {
+                // the dynamically linked CSL
+                "patom": "csl_patoms",
+            }
+        ),
+        "io_atom": Atom(
+            partial_atoms: {
+                "io_csl_dynamic_patom": "patom1",
+            }
+        ),
+    },
+    main_electron: "print_to_conterm_no_args_stub",
+)

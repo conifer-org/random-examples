@@ -1,0 +1,24 @@
+App(
+    name: "random-examples-csl-S-4T",
+    partial_atoms_sources: {
+        "patom1": PartialAtomsSource(
+            path:"../patoms.ron"
+        ),
+    },
+    molecules: [
+        Molecule(
+            name: "main",
+            atoms: [
+                "io_atom"
+            ]
+        ),
+    ],
+    atoms: {
+        "io_atom": Atom(
+            partial_atoms: {
+                "io_csl_static_patom": "patom1",
+            }
+        ),
+    },
+    main_electron: "test_spawn_no_args_stub",
+)
