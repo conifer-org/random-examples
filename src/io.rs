@@ -3,6 +3,7 @@
 use std::ops::Deref;
 use std::slice;
 use std::str;
+use std::sync::atomic::{AtomicU32, Ordering};
 use serde::{Serialize, Deserialize};
 
 use postcard::{from_bytes, to_allocvec};
@@ -199,3 +200,23 @@ pub extern "C" fn test_spawn_no_args_stub(_: i32) {
     test_spawn(FIXED);
 }
 
+/// Stub function to run some test code for Multi-MoleculeThreads TEMPORARY
+#[no_mangle]
+pub extern "C" fn multi_moleculethreads_test_no_args_stub(_: i32) {
+    print_to_conterm("Starting Thread 1");
+    spawn_stub("print_numbers_loop_no_args_stub");
+    print_to_conterm("Starting Thread 2");
+    spawn_stub("print_numbers_loop_no_args_stub");
+}
+
+static THE_NUM: AtomicU32 = AtomicU32::new(0);
+static LOOP_ID: AtomicU32 = AtomicU32::new(0);
+
+/// Stub function to run some test code for Print numbers in a loop TEMPORARY
+#[no_mangle]
+pub extern "C" fn print_numbers_loop_no_args_stub(_: i32) {
+    let loop_id = LOOP_ID.fetch_add(1, Ordering::SeqCst);
+    for _ in 0..50 {
+        print_to_conterm(&format!("Loop ID {} num: {}", loop_id, THE_NUM.fetch_add(1, Ordering::SeqCst)));
+    }
+}

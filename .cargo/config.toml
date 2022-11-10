@@ -2,4 +2,9 @@
 target = "wasm32-unknown-unknown"
 #target-dir = "../output/"
 
+[target."wasm32-unknown-unknown"]
+rustflags = [
+    "-C", "target-feature=+atomics,+bulk-memory",
+    "-C", "link-args=--features=atomics,bulk-memory"
+]
 

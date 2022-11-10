@@ -25,7 +25,7 @@ App(
             // applies to this atom and its partial_atoms
         }*/
     },
-    main_electron: "print_to_conterm_no_args_stub",
+    main_electron: "multi_moleculethreads_test_no_args_stub",
     /*env_vars: {
         // applies to all atoms and partial_atoms
     }*/
