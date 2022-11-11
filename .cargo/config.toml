@@ -5,6 +5,6 @@ target = "wasm32-unknown-unknown"
 [target."wasm32-unknown-unknown"]
 rustflags = [
     "-C", "target-feature=+atomics,+bulk-memory",
-    "-C", "link-args=--features=atomics,bulk-memory"
+    "-C", "link-args=--shared-memory --features=atomics,bulk-memory --no-check-features"
 ]
 
