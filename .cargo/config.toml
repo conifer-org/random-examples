@@ -1,5 +1,5 @@
-[unstable]
-build-std = ["core", "std", "alloc", "compiler_builtins", "proc_macro", "panic_abort"]
+#[unstable]
+#build-std = ["core", "std", "alloc", "compiler_builtins", "proc_macro", "panic_abort"]
 # ["core", "std", "alloc", "compiler_builtins", "proc_macro", "panic_abort"]
 
 [build]
@@ -10,6 +10,6 @@ target = "wasm32-unknown-unknown"
 # `rust-lld -flavor "wasm" --help`
 rustflags = [
     # `rustc --print target-features --target wasm32-unknown-unknown`
-    "-C", "target-feature=+atomics,+bulk-memory",
-    "-C", "link-args=--shared-memory --features=atomics,bulk-memory --no-check-features"
+    #"-C", "target-feature=+atomics,+bulk-memory",
+    #"-C", "link-args=--shared-memory --features=atomics,bulk-memory --no-check-features"
 ]
