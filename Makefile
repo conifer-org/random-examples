@@ -2,7 +2,7 @@ SHELL=/bin/bash
 
 CURDIR=$(shell pwd)
 
-RELEASE_TYPE?=debug
+RELEASE_TYPE?=release
 ARTIFACTS_INSTALL_DIR:=$(CURDIR)/../artifacts/
 CARGO_BUILD_FLAGS?=--no-default-features --features csl_static
 

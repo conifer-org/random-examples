@@ -2,7 +2,7 @@ PartialAtoms(
     partial_atoms: {
         "io_csl_static_patom": PartialAtom(
             name: "io_atom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csl_static'",
+            cmd: "RUSTUP_TOOLCHAIN= make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csl_static'",
             cmd_path: "", //indicates current path (./) relative to where this file is
             artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
@@ -18,7 +18,7 @@ PartialAtoms(
         ),
         "io_csl_dynamic_patom": PartialAtom(
             name: "io_atom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csl_dynamic'",
+            cmd: "RUSTUP_TOOLCHAIN= make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csl_dynamic'",
             cmd_path: "", //indicates current path (./) relative to where this file is
             artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
@@ -29,7 +29,7 @@ PartialAtoms(
         ),
         "io_csf_static_csl_static_patom": PartialAtom(
             name: "io_atom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csf_static__csl_static'",
+            cmd: "RUSTUP_TOOLCHAIN= make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csf_static__csl_static'",
             cmd_path: "", //indicates current path (./) relative to where this file is
             artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
@@ -40,7 +40,7 @@ PartialAtoms(
         ),
         "io_csf_dynamic_csl_static_patom": PartialAtom(
             name: "io_atom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csf_dynamic__csl_static'",
+            cmd: "RUSTUP_TOOLCHAIN= make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features csf_dynamic__csl_static'",
             cmd_path: "", //indicates current path (./) relative to where this file is
             artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
