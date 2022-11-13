@@ -8,8 +8,9 @@ target = "wasm32-unknown-unknown"
 
 [target."wasm32-unknown-unknown"]
 # `rust-lld -flavor "wasm" --help`
+#linker = "../../llvm-project/build/bin/wasm-ld"
 rustflags = [
     # `rustc --print target-features --target wasm32-unknown-unknown`
-    "-C", "target-feature=+atomics,+bulk-memory",
-    "-C", "link-args=--shared-memory --features=atomics,bulk-memory --no-check-features"
+    "-C", "target-feature=+atomics,+bulk-memory,+mutable-globals",
+    "-C", "link-args=--shared-memory --features=atomics,bulk-memory,mutable-globals"
 ]

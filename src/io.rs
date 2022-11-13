@@ -18,7 +18,7 @@ extern "C" {
 static HELLO: &'static str = "Hello, World!";
 
 #[no_mangle]
-pub extern "C" fn print_to_conterm(len: i32) {
+pub extern "C" fn print_to_conterm(index: i32, len: i32) -> i32 {
 
     let out_str = format!("Printing to Conterm FROM wasm::");
 
@@ -34,10 +34,12 @@ pub extern "C" fn print_to_conterm(len: i32) {
         print_str(args_vec.as_ptr(), args_vec.len());
 
     }
+
+    return 0;
 }
 
 #[no_mangle]
-pub extern "C" fn test_spawn(len: i32) {
+pub extern "C" fn test_spawn(index: i32, len: i32) -> i32 {
 
     let thread_nos = 7;
 
@@ -55,4 +57,6 @@ pub extern "C" fn test_spawn(len: i32) {
         print_str(args_vec.as_ptr(), args_vec.len());
 
     }
+
+    return 0;
 }
