@@ -1,0 +1,32 @@
+App(
+    name: "random-examples-csl-S-1T",
+    partial_atoms_sources: {
+        "patom1": PartialAtomsSource(
+            //type: local/git,
+            path: "../patoms.ron"
+        ),
+    },
+    molecules: [
+        Molecule(
+            name: "main",
+            atoms: [
+                "io_atom"
+            ]
+        ),
+    ],
+    atoms: {
+        "io_atom": Atom(
+            //type: local/git,
+            partial_atoms: {
+                "io_csl_static_patom": "patom1",
+            }
+        ),
+        /*env_vars: {
+            // applies to this atom and its partial_atoms
+        }*/
+    },
+    main_electron: "print_to_conterm",
+    /*env_vars: {
+        // applies to all atoms and partial_atoms
+    }*/
+)

@@ -1,0 +1,18 @@
+PartialAtoms(
+    partial_atoms: {
+        "io_csl_static_patom": PartialAtom(
+            name: "io_atom",
+            cmd: "RUSTUP_TOOLCHAIN= make build RELEASE_TYPE=release",
+            cmd_path: "", //indicates current path (./) relative to where this file is
+            artifact: "target/wasm32-unknown-unknown/release/random_examples.wasm",
+            //These names should be normal and mustr be replaced with stubs by CSL!
+            electrons: [
+                "test_spawn",
+                "print_to_conterm",
+            ],
+            /*env_vars: {
+                // applies to this partial_atom
+            }*/
+        ),
+    }
+)
