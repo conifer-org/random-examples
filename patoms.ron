@@ -11,6 +11,8 @@ PartialAtoms(
                 "print_to_conterm_no_args_stub",
                 "multi_moleculethreads_test_no_args_stub",
                 "print_numbers_loop_no_args_stub",
+                "boot_enjoy_decorating",
+                "decorate_string_receiver_stub",
             ],
             /*env_vars: {
                 // applies to this partial_atom
