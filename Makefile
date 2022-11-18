@@ -7,9 +7,11 @@ ARTIFACTS_INSTALL_DIR:=$(CURDIR)/../artifacts/
 CARGO_BUILD_FLAGS?=--no-default-features --features csl_static
 
 WASM32_TARGET_DIR:=target/wasm32-unknown-unknown/${RELEASE_TYPE}/
+WASI_TARGET_DIR:=target/wasm32-wasi/${RELEASE_TYPE}/
 LOCAL_TARGET_DIR:=target/${RELEASE_TYPE}/
 RANDOM_EXAMPLES_ROOT:=$(CURDIR)/
 RANDOM_EXAMPLES_WASM:=$(RANDOM_EXAMPLES_ROOT)/${WASM32_TARGET_DIR}/random_examples.wasm
+RANDOM_EXAMPLES_WASI:=$(RANDOM_EXAMPLES_ROOT)/${WASI_TARGET_DIR}/random_examples.wasm
 
 ifeq ($(RELEASE_TYPE),release)
 	override CARGO_BUILD_FLAGS += --release
@@ -20,7 +22,7 @@ endif
 # A solution will be found soon
 # using the rust feature of conditional compilation, requiring multiple compilations.
 # THOUGH, it can be solved using workspaces???
-.PHONY: run build bond $(RANDOM_EXAMPLES_WASM)
+.PHONY: run build bond $(RANDOM_EXAMPLES_WASM) build_wasi $(RANDOM_EXAMPLES_WASI)
 
 $(ARTIFACTS_INSTALL_DIR):
 	@mkdir -p $@
@@ -28,12 +30,24 @@ $(ARTIFACTS_INSTALL_DIR):
 $(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ \
 		$(RANDOM_EXAMPLES_ROOT)/Cargo.toml $(RANDOM_EXAMPLES_ROOT)/build.rs
 	@echo "Building random_examples (${RELEASE_TYPE})"
-	cargo build ${CARGO_BUILD_FLAGS}
+	cargo build ${CARGO_BUILD_FLAGS} --lib
 	@echo "Building done"
 
 build: $(RANDOM_EXAMPLES_WASM)
+
+$(RANDOM_EXAMPLES_WASI): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ \
+		$(RANDOM_EXAMPLES_ROOT)/Cargo.toml $(RANDOM_EXAMPLES_ROOT)/build.rs
+	@echo "Building random_examples (${RELEASE_TYPE})"
+	cargo build ${CARGO_BUILD_FLAGS} --bins --target wasm32-wasi
+	@echo "Building done"
+
+build_wasi: $(RANDOM_EXAMPLES_WASI)
 
 bond: $(ARTIFACTS_INSTALL_DIR)
 	@echo "-----------Packaging random-examples-csl-static---------------"
 	bond --app-config ${CURDIR}/conpkg_config_files/1_thread__csl_static.conifer.ron \
 	--install-dir ${ARTIFACTS_INSTALL_DIR}
+
+install: $(RANDOM_EXAMPLES_WASI) $(ARTIFACTS_INSTALL_DIR)
+	@echo "Installing random_examples in ${ARTIFACTS_INSTALL_DIR}"
+	@ln -f $< "${ARTIFACTS_INSTALL_DIR}/"
