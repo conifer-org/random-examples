@@ -2,7 +2,7 @@ PartialAtoms(
     partial_atoms: {
         "decorate_string_patom1": PartialAtom(
             name: "main_patom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features decorate_string_atom1'",
+            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--lib --no-default-features --features decorate_string_atom1'",
             cmd_path: "../", //indicates current path (./) relative to where this file is
             artifact: "../target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
@@ -15,7 +15,7 @@ PartialAtoms(
         ),
         "decorate_string_patom2": PartialAtom(
             name: "main_patom",
-            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--no-default-features --features decorate_string_atom2'",
+            cmd: "make build RELEASE_TYPE=release CARGO_BUILD_FLAGS='--lib --no-default-features --features decorate_string_atom2'",
             cmd_path: "../", //indicates current path (./) relative to where this file is
             artifact: "../target/wasm32-unknown-unknown/release/random_examples.wasm",
             //These names should be normal and mustr be replaced with stubs by CSL!
