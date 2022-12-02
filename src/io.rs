@@ -87,7 +87,7 @@ pub extern "C" fn print_to_conterm_args_stub(index: i32, len: i32) -> i32 {
 fn test_spawn(thread_nos: u8) {
     for _ in 0..thread_nos {
         // Stub is placed instead of real function by CSL
-        csl::spawn::<()>("print_to_conterm_no_args_stub", None, None);
+        csl::spawn::<()>("print_to_conterm_no_args_stub", None);
     }
 }
 
@@ -125,9 +125,9 @@ pub extern "C" fn test_spawn_no_args_stub(_: i32, _: i32) -> i32 {
 /// Stub function to run some test code for Multi-MoleculeThreads TEMPORARY
 #[no_mangle]
 pub extern "C" fn multi_moleculethreads_test_no_args_stub(_: i32,_: i32) -> i32 {
-    let handle1 = csl::spawn::<()>("print_numbers_loop_no_args_stub", None, None);
+    let handle1 = csl::spawn::<()>("print_numbers_loop_no_args_stub", None);
     csl::print(&format!("Started Thread 1: {}", handle1));
-    let handle2 = csl::spawn::<()>("print_numbers_loop_no_args_stub", None, None);
+    let handle2 = csl::spawn::<()>("print_numbers_loop_no_args_stub", None);
     csl::print(&format!("Started Thread 2: {}", handle2));
     return 0;
 }
@@ -185,7 +185,6 @@ fn decorate_string_sender_stub(input: String) -> String {
     //TODO: use tuple instead of structs
     let handle1 = csl::spawn(
         "decorate_string_receiver_stub",
-        None,
         Some(DecorateStringArgs { input })
     );
 
