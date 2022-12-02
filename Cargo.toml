@@ -9,7 +9,7 @@ name = "random_examples"
 path = "src/main.rs"
 
 [lib]
-path = "src/io.rs"
+path = "src/examples.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
@@ -18,15 +18,13 @@ postcard = { version = "1.0.2", features = ["alloc"] }
 serde = "1.*"
 
 csl-ffi = { path = "../../conifer-sdk/conifer-standard-library/csl-ffi", default-features = false, optional = true}
-csf-ffi = { path = "../../conifer-sdk/conifer-standard-framework/csf-ffi", default-features = false, optional = true}
 
 [features]
-default = ["csl_static"]
 csl-ffi = ["dep:csl-ffi"]
-csf-ffi = ["dep:csf-ffi"]
 csl_static = ["csl-ffi/static", "csl-ffi"]
-csl_dynamic = ["csl-ffi/dynamic", "csl_static"] # we also add static along with dynamic since,
-                                                # some functions don't work with dynamic
-csf_static__csl_static = ["csf-ffi/static", "csl_static", "csf-ffi"]
-csf_dynamic__csl_static = ["csf-ffi/dynamic", "csl_static", "csf-ffi"]
-# We're going to test CSF with only Static version of CSL, as the dynamic version is pretty useless
+decorate_string_atom1 = ["csl_static"]
+decorate_string_atom2 = ["csl_static"]
+
+decorate_string = ["decorate_string_atom1", "decorate_string_atom2"]
+multi_app_thread = ["csl_static"]
+default = ["decorate_string"]

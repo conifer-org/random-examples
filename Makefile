@@ -4,7 +4,7 @@ CURDIR=$(shell pwd)
 
 RELEASE_TYPE?=release
 ARTIFACTS_INSTALL_DIR:=$(CURDIR)/../artifacts/
-CARGO_BUILD_FLAGS?=--no-default-features --features csl_static
+CARGO_BUILD_FLAGS?=--no-default-features --features multi_app_thread
 
 WASM32_TARGET_DIR:=target/wasm32-unknown-unknown/${RELEASE_TYPE}/
 WASI_TARGET_DIR:=target/wasm32-wasi/${RELEASE_TYPE}/
@@ -45,7 +45,7 @@ build_wasi: $(RANDOM_EXAMPLES_WASI)
 
 bond: $(ARTIFACTS_INSTALL_DIR)
 	@echo "-----------Packaging random-examples-csl-static---------------"
-	bond --app-config ${CURDIR}/conpkg_config_files/1_thread__csl_static.conifer.ron \
+	bond --app-config ${CURDIR}/conpkg_config_files/multi_app_thread.ron \
 	--install-dir ${ARTIFACTS_INSTALL_DIR}
 
 install: $(RANDOM_EXAMPLES_WASI) $(ARTIFACTS_INSTALL_DIR)
