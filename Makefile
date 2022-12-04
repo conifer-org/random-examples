@@ -30,8 +30,8 @@ publish_conpkg_decorate_string_local \
 publish_conpkg_decorate_string_remote \
 build_decorate_string_atom1 \
 build_decorate_string_atom2 \
-build_multi_app_thread
-
+build_multi_app_thread \
+expand_macro
 
 $(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ \
 		$(RANDOM_EXAMPLES_ROOT)/Cargo.toml $(RANDOM_EXAMPLES_ROOT)/build.rs
@@ -68,6 +68,8 @@ build_multi_app_thread: $(RANDOM_EXAMPLES_WASM)
 	cargo build ${CARGO_BUILD_FLAGS} --lib --no-default-features --features multi_app_thread
 	@echo "Building done"
 
+expand_macro: $(RANDOM_EXAMPLES_WASM)
+	cargo expand --lib
 
 ### Bond stuff
 
