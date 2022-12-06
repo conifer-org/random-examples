@@ -26,5 +26,15 @@ PartialAtoms(
                 "RUSTUP_TOOLCHAIN": String(""),
             }
         ),
+        "decorate_string_patom3": PartialAtom(
+            name: "main_patom",
+            cmd: "make build_go",
+            cmd_path: "../", //indicates current path (./) relative to where this file is
+            artifact: "../target/fib.wasm",
+            //These names should be normal and mustr be replaced with stubs by CSL!
+            electrons: [
+                "fibArray",
+            ],
+        ),
     }
 )

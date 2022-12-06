@@ -16,7 +16,8 @@ App(
         Molecule(
             name: "decorate_string_molecule2",
             atoms: [
-                "decorate_string_atom2"
+                "decorate_string_atom2",
+                "decorate_string_atom3"
             ]
         ),
     ],
@@ -32,6 +33,12 @@ App(
             //type: local/git,
             partial_atoms: {
                 "decorate_string_patom2": "decorate_string_patom_source",
+            }
+        ),
+        "decorate_string_atom3": Atom(
+            //type: local/git,
+            partial_atoms: {
+                "decorate_string_patom3": "decorate_string_patom_source",
             }
         ),
         /*env_vars: {

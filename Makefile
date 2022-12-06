@@ -31,7 +31,9 @@ publish_conpkg_decorate_string_remote \
 build_decorate_string_atom1 \
 build_decorate_string_atom2 \
 build_multi_app_thread \
-expand_macro
+expand_macro \
+build_go
+
 
 $(RANDOM_EXAMPLES_WASM): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.cargo/ \
 		$(RANDOM_EXAMPLES_ROOT)/Cargo.toml $(RANDOM_EXAMPLES_ROOT)/build.rs
@@ -50,6 +52,8 @@ $(RANDOM_EXAMPLES_WASI): $(RANDOM_EXAMPLES_ROOT)/src/* $(RANDOM_EXAMPLES_ROOT)/.
 
 build_wasi: $(RANDOM_EXAMPLES_WASI)
 
+build_go:
+	tinygo build -o target/fib.wasm -target wasi gostuff/fib.go
 
 ### more specific commands
 

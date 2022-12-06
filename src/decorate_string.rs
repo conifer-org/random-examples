@@ -6,21 +6,22 @@ use serde::{Serialize, Deserialize};
 
 use postcard::{from_bytes, to_allocvec};
 
+
 /// Let's enjoy doing some decorations
 /// THis is App-dev defined
 #[csl::atom(name = "decorate_string_atom1")]
 #[csl::boot_electron]
 fn enjoy_decorating() {
 	let input = String::from("Tarun likes doing this");
-	let decorated = decorate_string_sender_stub(input);
+	let decorated = decorate_string_sender_stub(input, 5);
 	csl::print(decorated.as_str());
 }
 
 #[csl::atom(name = "decorate_string_atom1")]
-fn decorate_string_sender_stub(input: String) -> String {
+fn decorate_string_sender_stub(input: String, n: i32) -> String {
 	let handle1 = csl::spawn(
 		"decorate_string_receiver_stub",
-		Some((input,))
+		Some((input, n))
 	);
 
 	let output = csl::join::<String>(handle1).unwrap();
@@ -35,9 +36,9 @@ fn decorate_string_sender_stub(input: String) -> String {
 #[no_mangle]
 #[csl::atom(name = "decorate_string_atom2")]
 pub extern "C" fn decorate_string_receiver_stub(index: i32, len: i32) -> i32 {
-	let args = csl::get_args::<(String,)>(index as u32, len as usize);
+	let args = csl::get_args::<(String, i32)>(index as u32, len as usize);
 
-	let output = decorate_string(args.0);
+	let output = decorate_string(args.0, args.1);
 
 	let ret_val_vec = to_allocvec(&output).unwrap();
 	let ret_index = csl::put_ret_val(ret_val_vec);
@@ -47,6 +48,12 @@ pub extern "C" fn decorate_string_receiver_stub(index: i32, len: i32) -> i32 {
 
 /// A developer-defined function that takes a String and "decorates" it
 #[csl::atom(name = "decorate_string_atom2")]
-fn decorate_string(input: String) -> String {
-	format!("( ͡° ͜ʖ ͡°)_/¯ {input} ( ͡° ͜ʖ ͡°)_/¯")
+fn decorate_string(input: String, n: i32) -> String {
+	unsafe { format!("{input} :: Fib of {} {}", n + n, fibArray(n, n)) }
+}
+
+#[csl::atom(name = "decorate_string_atom2")]
+#[link(wasm_import_module = "decorate_string_atom3")]
+extern "C" {
+	pub fn fibArray(n: i32, r: i32) -> i32;
 }

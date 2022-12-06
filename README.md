@@ -17,3 +17,9 @@ This repo has random example conifer app (in various branches and commits) that 
 
 Use `make build [RELEASE_TYPE=release] [CARGO_BUILD_FLAGS=..]` to build.
 
+
+## Installing TinyGo
+
+https://tinygo.org/getting-started/install/linux/#ubuntu-debian
+
+
